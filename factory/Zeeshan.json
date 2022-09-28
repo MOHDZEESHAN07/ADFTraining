@@ -1,0 +1,9 @@
+{
+	"name": "Zeeshan",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dd818395-5204-43be-9b0a-cc1e5c37a049",
+		"tenantId": "c0ef5325-2a96-464c-ac7b-2ef685ef2152"
+	}
+}
