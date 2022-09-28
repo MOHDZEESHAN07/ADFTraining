@@ -1,0 +1,6 @@
+{
+	"name": "pipeline_csv_to_sqldb",
+	"properties": {
+		"annotations": []
+	}
+}
