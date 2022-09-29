@@ -20,7 +20,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "hollywoodmoviejoins"
+				},
+				{
+					"name": "select1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Column_1 as string,",
@@ -40,7 +47,25 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> hollywoodmoviesdbcsv"
+				"     ignoreNoFilesFound: false) ~> hollywoodmoviesdbcsv",
+				"hollywoodmoviescsv, hollywoodmoviesdbcsv join(hollywoodmoviescsv@Column_1 == hollywoodmoviesdbcsv@Column_1,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> hollywoodmoviejoins",
+				"hollywoodmoviejoins select(mapColumn(",
+				"          Column_1 = hollywoodmoviescsv@Column_1,",
+				"          Column_2 = hollywoodmoviescsv@Column_2,",
+				"          Column_3 = hollywoodmoviescsv@Column_3,",
+				"          Column_1 = hollywoodmoviesdbcsv@Column_1,",
+				"          Column_2 = hollywoodmoviesdbcsv@Column_2,",
+				"          Column_3 = hollywoodmoviesdbcsv@Column_3,",
+				"          Column_4,",
+				"          Column_5,",
+				"          Column_6",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
