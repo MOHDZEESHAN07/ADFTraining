@@ -1,11 +1,13 @@
 {
-	"name": "moviesoutput",
+	"name": "moviesout",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorageinput",
 			"type": "LinkedServiceReference"
 		},
-		"annotations": [],
+		"annotations": [
+			"moviesoutp"
+		],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
