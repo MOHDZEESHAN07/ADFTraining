@@ -19,7 +19,15 @@
 					"name": "hollywoodmoviesdbcsv"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "hollywoodoutput",
+						"type": "DatasetReference"
+					},
+					"name": "hollywoodoutput"
+				}
+			],
 			"transformations": [
 				{
 					"name": "hollywoodmoviejoins"
@@ -65,7 +73,11 @@
 				"          Column_6",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> hollywoodoutput"
 			]
 		}
 	}
