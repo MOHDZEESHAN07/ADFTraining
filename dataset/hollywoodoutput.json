@@ -1,0 +1,22 @@
+{
+	"name": "hollywoodoutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageinput",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "hollywoodoutput",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
