@@ -5,9 +5,7 @@
 			"referenceName": "AzureBlobStorageinput",
 			"type": "LinkedServiceReference"
 		},
-		"annotations": [
-			"moviesoutp"
-		],
+		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {

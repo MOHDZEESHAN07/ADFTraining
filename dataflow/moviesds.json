@@ -22,10 +22,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "moviesoutput",
+						"referenceName": "moviesout",
 						"type": "DatasetReference"
 					},
-					"name": "moviesop"
+					"name": "moviesop",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorageinput",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
