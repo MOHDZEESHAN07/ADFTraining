@@ -23,6 +23,17 @@
 						"referenceName": "output",
 						"type": "LinkedServiceReference"
 					}
+				},
+				{
+					"dataset": {
+						"referenceName": "moviesout",
+						"type": "DatasetReference"
+					},
+					"name": "moviescountbyyear",
+					"rejectedDataLinkedService": {
+						"referenceName": "output",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -53,7 +64,13 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     outputAssertFailedRows: true,",
 				"     assertFailure_container: 'output',",
-				"     partitionBy('hash', 1)) ~> moviesclean"
+				"     partitionBy('hash', 1)) ~> moviesclean",
+				"Ratingbyyear sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['moviecountbyyear'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> moviescountbyyear"
 			]
 		}
 	}
