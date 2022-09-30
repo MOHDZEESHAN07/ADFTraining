@@ -7,7 +7,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "moviesv1",
+						"referenceName": "moviesv11",
 						"type": "DatasetReference"
 					},
 					"name": "moviesv1"
