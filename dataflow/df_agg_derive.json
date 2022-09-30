@@ -1,0 +1,25 @@
+{
+	"name": "df_agg_derive",
+	"properties": {
+		"description": "data flow is created",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "moviesv1",
+						"type": "DatasetReference"
+					},
+					"name": "moviesv1"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> moviesv1"
+			]
+		}
+	}
+}
