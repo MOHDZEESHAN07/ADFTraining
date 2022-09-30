@@ -27,7 +27,7 @@
 			],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
+					"name": "extractyeartitle"
 				}
 			],
 			"scriptLines": [
@@ -40,8 +40,8 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> moviesv1",
 				"moviesv1 derive(year = toInteger(trim(right(title,6),'()')),",
-				"          title = toString(left(title,length(title)-6))) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"          title = toString(left(title,length(title)-6))) ~> extractyeartitle",
+				"extractyeartitle sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['movie111'],",
 				"     skipDuplicateMapInputs: true,",
