@@ -102,6 +102,54 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_agg_derive')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "df_agg_derive",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "df_agg_derive",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"moviesv1": {},
+									"moviesclean": {},
+									"moviescountbyyear": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/df_agg_derive')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -326,7 +374,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "movies.csv",
+						"fileName": "movies_v1.csv",
 						"container": "inputfiles"
 					},
 					"columnDelimiter": ",",
@@ -547,6 +595,90 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/df_agg_derive')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "movies",
+								"type": "DatasetReference"
+							},
+							"name": "moviesv1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "moviesout",
+								"type": "DatasetReference"
+							},
+							"name": "moviesclean",
+							"rejectedDataLinkedService": {
+								"referenceName": "output",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"dataset": {
+								"referenceName": "moviesout",
+								"type": "DatasetReference"
+							},
+							"name": "moviescountbyyear",
+							"rejectedDataLinkedService": {
+								"referenceName": "output",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"transformations": [
+						{
+							"name": "extractyeartitle"
+						},
+						{
+							"name": "Ratingbyyear"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          movieId as string,",
+						"          title as string,",
+						"          genres as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> moviesv1",
+						"moviesv1 derive(year = toInteger(trim(right(title,6),'()')),",
+						"          title = toString(left(title,length(title)-6))) ~> extractyeartitle",
+						"extractyeartitle aggregate(groupBy(year),",
+						"     AvgRating = count(year)) ~> Ratingbyyear",
+						"extractyeartitle sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     partitionFileNames:['movie111'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     outputAssertFailedRows: true,",
+						"     assertFailure_container: 'output',",
+						"     partitionBy('hash', 1)) ~> moviesclean",
+						"Ratingbyyear sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     partitionFileNames:['moviecountbyyear'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> moviescountbyyear"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/movies')]",
+				"[concat(variables('factoryId'), '/datasets/moviesout')]",
+				"[concat(variables('factoryId'), '/linkedServices/output')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/hollywoodmovies')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -743,139 +875,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/df_agg_derive')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "movies",
-								"type": "DatasetReference"
-							},
-							"name": "moviesv1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "moviesout",
-								"type": "DatasetReference"
-							},
-							"name": "moviesclean",
-							"rejectedDataLinkedService": {
-								"referenceName": "output",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"dataset": {
-								"referenceName": "moviesout",
-								"type": "DatasetReference"
-							},
-							"name": "moviescountbyyear",
-							"rejectedDataLinkedService": {
-								"referenceName": "output",
-								"type": "LinkedServiceReference"
-							}
-						}
-					],
-					"transformations": [
-						{
-							"name": "extractyeartitle"
-						},
-						{
-							"name": "Ratingbyyear"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          movieId as string,",
-						"          title as string,",
-						"          genres as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> moviesv1",
-						"moviesv1 derive(year = toInteger(trim(right(title,6),'()')),",
-						"          title = toString(left(title,length(title)-6))) ~> extractyeartitle",
-						"extractyeartitle aggregate(groupBy(year),",
-						"     AvgRating = count(year)) ~> Ratingbyyear",
-						"extractyeartitle sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     partitionFileNames:['movie111'],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     outputAssertFailedRows: true,",
-						"     assertFailure_container: 'output',",
-						"     partitionBy('hash', 1)) ~> moviesclean",
-						"Ratingbyyear sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     partitionFileNames:['moviecountbyyear'],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('hash', 1)) ~> moviescountbyyear"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/movies')]",
-				"[concat(variables('factoryId'), '/datasets/moviesout')]",
-				"[concat(variables('factoryId'), '/linkedServices/output')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_agg_derive')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "df_agg_derive",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "df_agg_derive",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"moviesv1": {},
-									"moviesclean": {},
-									"moviescountbyyear": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
-				"[concat(variables('factoryId'), '/dataflows/df_agg_derive')]"
-			]
 		}
 	]
 }
