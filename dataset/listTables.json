@@ -1,0 +1,12 @@
+{
+	"name": "listTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseoutput",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
