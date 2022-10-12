@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "dimcustomer_SCDtype1",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -49,7 +49,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> dimcustomer",
-				"customersource derive(hashkey = ERROR_FUNCTION('sha2(256, iifNull(Title,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(FirstName,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(MiddleName,__SINGLE_QUOTE____SINGLE_QUOTE__) + iifNull(LastName,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(Suffix,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(CompanyName,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(SalesPerson,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(EmailAddress,__SINGLE_QUOTE____SINGLE_QUOTE__) +iifNull(Phone,__SINGLE_QUOTE____SINGLE_QUOTE__))abs()')) ~> createhashkey"
+				"customersource derive(hashkey = sha2(256, iifNull(Title,'') +iifNull(FirstName,'') +iifNull(MiddleName,'') + iifNull(LastName,'') +iifNull(Suffix,'') +iifNull(CompanyName,'') +iifNull(SalesPerson,'') +iifNull(EmailAddress,'') +iifNull(Phone,''))abs()) ~> createhashkey"
 			]
 		}
 	}
