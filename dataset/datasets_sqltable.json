@@ -1,0 +1,12 @@
+{
+	"name": "datasets_sqltable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "carscsv_to_sqltable",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
