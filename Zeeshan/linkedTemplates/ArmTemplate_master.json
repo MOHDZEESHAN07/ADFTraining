@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseoutput'"
 		},
+		"Linked_service_cars_new_csv_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Linked_service_cars_new_csv'"
+		},
+		"carscsv_to_sqltable_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'carscsv_to_sqltable'"
+		},
 		"output_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'output'"
@@ -51,6 +59,12 @@
 					},
 					"AzureSqlDatabaseoutput_connectionString": {
 						"value": "[parameters('AzureSqlDatabaseoutput_connectionString')]"
+					},
+					"Linked_service_cars_new_csv_connectionString": {
+						"value": "[parameters('Linked_service_cars_new_csv_connectionString')]"
+					},
+					"carscsv_to_sqltable_connectionString": {
+						"value": "[parameters('carscsv_to_sqltable_connectionString')]"
 					},
 					"output_connectionString": {
 						"value": "[parameters('output_connectionString')]"
