@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "copy csv",
+				"name": "copy activity cars",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -45,7 +45,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "cars",
+						"referenceName": "Datasets_new_cars",
 						"type": "DatasetReference"
 					}
 				],
