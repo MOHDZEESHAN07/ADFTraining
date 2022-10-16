@@ -52,13 +52,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "cars_csvtodataaset",
+						"referenceName": "blobtocsv_dataset",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "csvtosql",
+						"referenceName": "ds_csvtosql",
 						"type": "DatasetReference"
 					}
 				]
