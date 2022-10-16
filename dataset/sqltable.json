@@ -2,7 +2,7 @@
 	"name": "sqltable",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabaseoutput",
+			"referenceName": "LS_csvtosql",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -15,6 +15,10 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "cars_sqldb"
+		}
 	}
 }
