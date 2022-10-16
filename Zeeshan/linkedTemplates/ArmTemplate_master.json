@@ -15,25 +15,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseoutput'"
 		},
+		"LS_cars_source_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_cars_source'"
+		},
 		"LS_csvtosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_csvtosql'"
-		},
-		"Linked_service_cars_new_csv_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Linked_service_cars_new_csv'"
 		},
 		"blob_csvtodatset_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'blob_csvtodatset'"
 		},
-		"carscsv_to_sqltable_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'carscsv_to_sqltable'"
-		},
 		"output_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'output'"
+		},
+		"LS_cars_output_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_cars_output'"
 		},
 		"containerUri": {
 			"type": "string",
@@ -68,20 +68,20 @@
 					"AzureSqlDatabaseoutput_connectionString": {
 						"value": "[parameters('AzureSqlDatabaseoutput_connectionString')]"
 					},
+					"LS_cars_source_connectionString": {
+						"value": "[parameters('LS_cars_source_connectionString')]"
+					},
 					"LS_csvtosql_connectionString": {
 						"value": "[parameters('LS_csvtosql_connectionString')]"
-					},
-					"Linked_service_cars_new_csv_connectionString": {
-						"value": "[parameters('Linked_service_cars_new_csv_connectionString')]"
 					},
 					"blob_csvtodatset_connectionString": {
 						"value": "[parameters('blob_csvtodatset_connectionString')]"
 					},
-					"carscsv_to_sqltable_connectionString": {
-						"value": "[parameters('carscsv_to_sqltable_connectionString')]"
-					},
 					"output_connectionString": {
 						"value": "[parameters('output_connectionString')]"
+					},
+					"LS_cars_output_connectionString": {
+						"value": "[parameters('LS_cars_output_connectionString')]"
 					}
 				}
 			},

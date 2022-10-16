@@ -15,38 +15,31 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseoutput'"
 		},
+		"LS_cars_source_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_cars_source'"
+		},
 		"LS_csvtosql_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'LS_csvtosql'"
-		},
-		"Linked_service_cars_new_csv_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Linked_service_cars_new_csv'"
 		},
 		"blob_csvtodatset_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'blob_csvtodatset'"
 		},
-		"carscsv_to_sqltable_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'carscsv_to_sqltable'"
-		},
 		"output_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'output'"
+		},
+		"LS_cars_output_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_cars_output'"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/default')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
-			"apiVersion": "2018-06-01",
-			"properties": {},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AutoResolveIntegrationRuntime')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
@@ -75,6 +68,13 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+			"apiVersion": "2018-06-01",
+			"properties": {},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorageinput')]",
@@ -115,14 +115,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_csvtosql')]",
+			"name": "[concat(parameters('factoryName'), '/LS_cars_source')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('LS_csvtosql_connectionString')]"
+					"connectionString": "[parameters('LS_cars_source_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -134,14 +134,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Linked_service_cars_new_csv')]",
+			"name": "[concat(parameters('factoryName'), '/LS_csvtosql')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureBlobStorage",
+				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('Linked_service_cars_new_csv_connectionString')]"
+					"connectionString": "[parameters('LS_csvtosql_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -172,14 +172,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/carscsv_to_sqltable')]",
+			"name": "[concat(parameters('factoryName'), '/output')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureSqlDatabase",
+				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('carscsv_to_sqltable_connectionString')]"
+					"connectionString": "[parameters('output_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -191,14 +191,14 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/output')]",
+			"name": "[concat(parameters('factoryName'), '/LS_cars_output')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureBlobStorage",
+				"type": "AzureSqlDatabase",
 				"typeProperties": {
-					"connectionString": "[parameters('output_connectionString')]"
+					"connectionString": "[parameters('LS_cars_output_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -255,59 +255,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabaseoutput')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/blobtocsv_dataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "blob_csvtodatset",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "cars_new.csv",
-						"container": "newinput"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Make",
-						"type": "String"
-					},
-					{
-						"name": "Model",
-						"type": "String"
-					},
-					{
-						"name": "Type",
-						"type": "String"
-					},
-					{
-						"name": "Origin",
-						"type": "String"
-					},
-					{
-						"name": "DriveTrain",
-						"type": "String"
-					},
-					{
-						"name": "Length",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/blob_csvtodatset')]"
 			]
 		},
 		{
@@ -408,54 +355,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabaseoutput')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_csvtosql')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_csvtosql",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "make",
-						"type": "varchar"
-					},
-					{
-						"name": "model",
-						"type": "nvarchar"
-					},
-					{
-						"name": "type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "origin",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DriveTrain",
-						"type": "nvarchar"
-					},
-					{
-						"name": "length",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 0
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "cars"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_csvtosql')]"
 			]
 		},
 		{
@@ -675,6 +574,60 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageinput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/moviesout')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageinput",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "moviesoutput",
+						"container": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageinput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/moviesv11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageinput",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "movies_v1.csv",
+						"container": "inputfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageinput')]"
