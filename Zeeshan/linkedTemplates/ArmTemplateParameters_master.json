@@ -11,7 +11,13 @@
 		"AzureSqlDatabaseoutput_connectionString": {
 			"value": ""
 		},
+		"LS_csvtosql_connectionString": {
+			"value": ""
+		},
 		"Linked_service_cars_new_csv_connectionString": {
+			"value": ""
+		},
+		"blob_csvtodatset_connectionString": {
 			"value": ""
 		},
 		"carscsv_to_sqltable_connectionString": {

@@ -15,9 +15,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseoutput'"
 		},
+		"LS_csvtosql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_csvtosql'"
+		},
 		"Linked_service_cars_new_csv_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Linked_service_cars_new_csv'"
+		},
+		"blob_csvtodatset_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'blob_csvtodatset'"
 		},
 		"carscsv_to_sqltable_connectionString": {
 			"type": "secureString",
@@ -60,8 +68,14 @@
 					"AzureSqlDatabaseoutput_connectionString": {
 						"value": "[parameters('AzureSqlDatabaseoutput_connectionString')]"
 					},
+					"LS_csvtosql_connectionString": {
+						"value": "[parameters('LS_csvtosql_connectionString')]"
+					},
 					"Linked_service_cars_new_csv_connectionString": {
 						"value": "[parameters('Linked_service_cars_new_csv_connectionString')]"
+					},
+					"blob_csvtodatset_connectionString": {
+						"value": "[parameters('blob_csvtodatset_connectionString')]"
 					},
 					"carscsv_to_sqltable_connectionString": {
 						"value": "[parameters('carscsv_to_sqltable_connectionString')]"
