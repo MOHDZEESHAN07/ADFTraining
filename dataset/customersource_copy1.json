@@ -1,0 +1,16 @@
+{
+	"name": "customersource_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseoutput",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CustomerSource"
+		}
+	}
+}
