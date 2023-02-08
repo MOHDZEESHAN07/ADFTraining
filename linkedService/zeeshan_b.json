@@ -1,0 +1,16 @@
+{
+	"name": "zeeshan_b",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=zeeshan;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEFCMDhFQTM3LTA2MzUtNEY5My1BNjQ3LUZFMDI1MEVCODAyQV9mMGQ0ZjZhMS1hMTJkLTQxNzMtYjI3YS02ZmQ4OWQyMWI5MjAiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "integrationruntimesql",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
