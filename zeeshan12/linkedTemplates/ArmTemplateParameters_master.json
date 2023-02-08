@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "zeeshan12"
+		},
+		"AzureBlobStorageinput_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabasecustomer_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabaseoutput_connectionString": {
+			"value": ""
+		},
+		"AzureSqlLinkedService_connectionString": {
+			"value": ""
+		},
+		"LS_cars_output_connectionString": {
+			"value": ""
+		},
+		"LS_cars_source_connectionString": {
+			"value": ""
+		},
+		"LS_csvtosql_connectionString": {
+			"value": ""
+		},
+		"StorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"blob_csvtodatset_connectionString": {
+			"value": ""
+		},
+		"customersource_connectionString": {
+			"value": ""
+		},
+		"moviesoutput_connectionString": {
+			"value": ""
+		},
+		"output_connectionString": {
+			"value": ""
+		},
+		"sqldatabase_z_connectionString": {
+			"value": ""
+		},
+		"sqldb_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=zeeshan123.database.windows.net;Initial Catalog=master"
+		},
+		"zeeshan_b_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeSQL_zeeshan_properties_typeProperties_url": {
+			"value": "https://zeeshan.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://zeeshan.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://zeeshan.dfs.core.windows.net/"
+		},
+		"zeeshan_blob_properties_typeProperties_serviceEndpoint": {
+			"value": "https://zeeshan.blob.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
