@@ -2,7 +2,7 @@
 	"name": "dimcustomer",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabaseoutput",
+			"referenceName": "sqldatabase_z",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

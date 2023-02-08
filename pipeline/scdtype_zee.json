@@ -1,9 +1,9 @@
 {
-	"name": "PL_scdtype1",
+	"name": "scdtype_zee",
 	"properties": {
 		"activities": [
 			{
-				"name": "scd1",
+				"name": "scdtype1_zeeshan",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,12 +16,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "scdtype1",
+						"referenceName": "scdtype1_z",
 						"type": "DataFlowReference"
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"integrationRuntime": {
+						"referenceName": "integrationRuntimez",
+						"type": "IntegrationRuntimeReference"
 					},
 					"traceLevel": "Fine"
 				}
