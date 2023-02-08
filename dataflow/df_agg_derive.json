@@ -5,19 +5,11 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "movies",
-						"type": "DatasetReference"
-					},
 					"name": "moviesv1"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "moviesout",
-						"type": "DatasetReference"
-					},
 					"name": "moviesclean",
 					"rejectedDataLinkedService": {
 						"referenceName": "output",
@@ -25,10 +17,6 @@
 					}
 				},
 				{
-					"dataset": {
-						"referenceName": "moviesout",
-						"type": "DatasetReference"
-					},
 					"name": "moviescountbyyear",
 					"rejectedDataLinkedService": {
 						"referenceName": "output",
@@ -51,8 +39,7 @@
 				"          genres as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> moviesv1",
+				"     validateSchema: false) ~> moviesv1",
 				"moviesv1 derive(year = toInteger(trim(right(title,6),'()')),",
 				"          title = toString(left(title,length(title)-6))) ~> extractyeartitle",
 				"extractyeartitle aggregate(groupBy(year),",

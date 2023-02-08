@@ -5,26 +5,14 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"dataset": {
-						"referenceName": "movies",
-						"type": "DatasetReference"
-					},
 					"name": "movies"
 				},
 				{
-					"dataset": {
-						"referenceName": "moviesDB",
-						"type": "DatasetReference"
-					},
 					"name": "moviesdb"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "moviesout",
-						"type": "DatasetReference"
-					},
 					"name": "moviesop",
 					"rejectedDataLinkedService": {
 						"referenceName": "AzureBlobStorageinput",
@@ -50,8 +38,7 @@
 				"          genres as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> movies",
+				"     validateSchema: false) ~> movies",
 				"source(output(",
 				"          movie as string,",
 				"          title as string,",
@@ -61,8 +48,7 @@
 				"          RottenTomato as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> moviesdb",
+				"     validateSchema: false) ~> moviesdb",
 				"movies derive(titlenew = toString(left(title,length(title)-6))) ~> moviesclean",
 				"moviesclean, moviesdb join(movies@title == moviesdb@title,",
 				"     joinType:'inner',",
