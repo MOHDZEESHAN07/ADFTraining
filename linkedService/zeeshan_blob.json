@@ -1,0 +1,15 @@
+{
+	"name": "zeeshan_blob",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://zeeshan.blob.core.windows.net/",
+			"accountKind": "StorageV2"
+		},
+		"connectVia": {
+			"referenceName": "integrationruntimesql",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
