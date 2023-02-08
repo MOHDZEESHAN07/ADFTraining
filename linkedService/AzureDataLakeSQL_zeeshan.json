@@ -1,0 +1,14 @@
+{
+	"name": "AzureDataLakeSQL_zeeshan",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://zeeshan.dfs.core.windows.net/"
+		},
+		"connectVia": {
+			"referenceName": "integrationruntimesql",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
