@@ -844,7 +844,7 @@
 						"     format: 'table') ~> dimcustomer",
 						"customersource derive(Hashkey = sha2(256,iifNull(Title,'')+iifNull(FirstName,'')+iifNull(MiddleName,'')+iifNull(LastName,'')+iifNull(Suffix,'')+iifNull(CompanyName,'')+iifNull(SalesPerson,'')+iifNull(EmailAddress,'')+iifNull(Phone)+iifNull(Phone,''))) ~> Hashkey",
 						"Hashkey, dimcustomer exists(Hashkey@Hashkey == dimcustomer@HashKey,",
-						"     negate:false,",
+						"     negate:true,",
 						"     broadcast: 'auto')~> exists",
 						"exists, dimcustomer lookup(customersource@CustomerID == dimcustomer@CustomerID,",
 						"     multiple: false,",
