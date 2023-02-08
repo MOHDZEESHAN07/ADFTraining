@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=zeeshan-server.database.windows.net;initial catalog=Zeeshan_DB;user id=zeeshan_server",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEFCMDhFQTM3LTA2MzUtNEY5My1BNjQ3LUZFMDI1MEVCODAyQV8xNTRlYjNjOS05ZWMyLTQ0OTctYjc2Ni1iNDk0NGY2M2UyZDAiDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=zeeshan-server.database.windows.net;initial catalog=Zeeshan_DB;user id=zeeshan123",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEFCMDhFQTM3LTA2MzUtNEY5My1BNjQ3LUZFMDI1MEVCODAyQV80MDFkYzRkNC02YTEyLTQ0MjUtYTY1My0zYTZlNTllZDQyNWUiDQp9"
 		},
 		"connectVia": {
 			"referenceName": "integrationruntimesql",
